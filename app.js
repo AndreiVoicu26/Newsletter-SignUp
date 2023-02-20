@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
-client.setConfig({apiKey: "0c30dd4201616337aa0d205e54bb25d9-us10", server: "us10"});
+client.setConfig({apiKey: "8ea7d63f55fd5cb92d84e660f7b03fe1-us10", server: "us10"});
 
 app.get("/", function(req, res) {
     res.sendFile(__dirname + "/signup.html");
@@ -50,5 +50,5 @@ app.listen(3000, function() {
     console.log("Server is runing on port 3000");
 });
 
-//API-key: 0c30dd4201616337aa0d205e54bb25d9-us10
+//API-key: 8ea7d63f55fd5cb92d84e660f7b03fe1-us10
 //List ID: 2928665ae9
