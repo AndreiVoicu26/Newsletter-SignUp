@@ -2,12 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https");
 const client = require("@mailchimp/mailchimp_marketing");
+require("dotenv").config();
 
 const app = express();
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
-client.setConfig({apiKey: "8ea7d63f55fd5cb92d84e660f7b03fe1-us10", server: "us10"});
+client.setConfig({apiKey: process.env.API_KEY, server: process.env.API_SERVER});
 
 app.get("/", function(req, res) {
     res.sendFile(__dirname + "/signup.html");
@@ -25,7 +26,7 @@ app.post("/", function(req, res) {
     }
 
     const run = async () => {
-        const response = await client.lists.addListMember("2928665ae9", {
+        const response = await client.lists.addListMember(process.env.LIST_ID, {
             email_address: subscribingUser.email,
             status: "subscribed",
             merge_fields: {
@@ -46,9 +47,8 @@ app.post("/failure", function(req, res) {
     res.redirect("/");
 })
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
     console.log("Server is runing on port 3000");
 });
 
-//API-key: 8ea7d63f55fd5cb92d84e660f7b03fe1-us10
-//List ID: 2928665ae9
+//Online: https://newsletter-signup-wi2d.onrender.com
